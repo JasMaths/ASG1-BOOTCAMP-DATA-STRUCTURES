@@ -48,6 +48,7 @@ void addFood()
 	printf("\nWhat do you want to add?\n");
 	puts("1. Dessert");
 	puts("2. Drink");
+	puts("3. Return");
 	do
 	{
 		printf("Choose: ");
@@ -59,6 +60,9 @@ void addFood()
 			break;
 		case 2:
 			drinkMenu();
+
+		case 3:
+			return;
 		}
 	} while (input != 1 && input != 2);
 }
@@ -210,8 +214,8 @@ void sleep()
 		;
 }
 
-int main()
-{
-	addFood();
-	return 0;
-}
+// int main()
+// {
+// 	addFood();
+// 	return 0;
+// }
