@@ -6,10 +6,11 @@
 #include "Variables_prototypes.cpp"
 #include "Menu_Dessert_Drink.cpp"
 #include "orderFood.cpp"
+#include "orderHistory.cpp"
 
 void welcome()
 {
-    puts("Welcome to Opercooked");
+    printf("Welcome to Opercooked\n");
     printf("Today profit : $ %d\n", 0);
     puts("===========================");
     puts("1. Add Dessert or Beverage");
@@ -43,6 +44,7 @@ void main_menu()
         case 2:
             break;
         case 3:
+            view_order_history();
             break;
         case 4:
             orderFood();
