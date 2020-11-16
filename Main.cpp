@@ -46,6 +46,7 @@ void main_menu()
             break;
         case 4:
             orderFood();
+            getchar();
             break;
         case 5:
             return;
