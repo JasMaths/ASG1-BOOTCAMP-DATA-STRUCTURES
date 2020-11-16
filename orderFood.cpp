@@ -1,16 +1,3 @@
-int order, orderCtr = 0, id = 0;
-
-void printTable(), addOrder(), write(); // Prototypes
-
-struct orders
-{
-    char type[10], name[100], topping[100], flavor[100], size, orderedtime[100];
-    int price, cookingTime;
-    double calories;
-};
-
-struct orders Orders[100];
-
 void orderFood()
 {
     if (n == 1)
