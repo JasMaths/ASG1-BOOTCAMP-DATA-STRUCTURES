@@ -32,7 +32,6 @@ void addFood()
 	puts("What do you want to add?");
 	puts("1. Dessert");
 	puts("2. Drink");
-	puts("3. Return");
 	do
 	{
 	printf("Choose: ");
@@ -43,10 +42,7 @@ void addFood()
 		dessertMenu();
 		break;
 		case 2:
-    drinkMenu();
-    break;
-		case 3:
-			return;
+                drinkMenu();
 		}
 	} while (input != 1 && input != 2);
 }
@@ -61,13 +57,13 @@ void dessertMenu()
 	{
 	printf("Input the name [at least 5 characters]: ");
 	getchar();
-    scanf("%[^\n]", nameTemp);
-    }while(strlen(nameTemp) < 5);
+        scanf("%[^\n]", nameTemp);
+        }while(strlen(nameTemp) < 5);
     
-    do
+        do
 	{
-    printf("Input the price [10 - 500]: $ ");
-    scanf("%d", &priceTemp);
+        printf("Input the price [10 - 500]: $ ");
+        scanf("%d", &priceTemp);
 	}while(priceTemp < 10 || priceTemp > 500);
     
 	do
