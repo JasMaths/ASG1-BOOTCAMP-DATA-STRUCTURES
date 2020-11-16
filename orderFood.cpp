@@ -40,7 +40,14 @@ void addOrder()
 
     for (int i = 1; i <= orderCtr; i++)
     {
-        fprintf(fp, "%d %s %d %s %.2lf %s %c %s", i, Orders[i].name, Orders[i].price, (strcmp(Orders[i].type, type1) != 0) ? "-" : Orders[i].topping, Orders[i].calories, (strcmp(Orders[i].type, type1) == 0) ? "-" : Orders[i].flavor, (Orders[i].size != 'S' && Orders[i].size != 'M' && Orders[i].size != 'L') ? '-' : Orders[i].size, Orders[i].orderedtime);
+        if (strcmp(Orders[i].type, type1) == 0)
+        {
+            fprintf(fp, "%d %s %d %s %.2lf %s %c %s", i, Orders[i].name, Orders[i].price, (strcmp(Orders[i].type, type1) != 0) ? "-" : Orders[i].topping, Orders[i].calories, (strcmp(Orders[i].type, type1) == 0) ? "-" : Orders[i].flavor, (Orders[i].size != 'S' && Orders[i].size != 'M' && Orders[i].size != 'L') ? '-' : Orders[i].size, Orders[i].orderedtime);
+        }
+        else
+        {
+            fprintf(fp, "%d %s %d %s %s %s %c %s", i, Orders[i].name, Orders[i].price, (strcmp(Orders[i].type, type1) != 0) ? "-" : Orders[i].topping, "-", (strcmp(Orders[i].type, type1) == 0) ? "-" : Orders[i].flavor, (Orders[i].size != 'S' && Orders[i].size != 'M' && Orders[i].size != 'L') ? '-' : Orders[i].size, Orders[i].orderedtime);
+        }
     }
 
     fclose(fp);
