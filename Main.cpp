@@ -5,8 +5,9 @@
 #define MAX 1000
 #include "Variables_prototypes.cpp"
 #include "Menu_Dessert_Drink.cpp"
+#include "orderFood.cpp"
 
-void welcome ()
+void welcome()
 {
     puts("Welcome to Opercooked");
     printf("Today profit : $ %d\n", 0);
@@ -18,8 +19,7 @@ void welcome ()
     puts("5. Exit");
 }
 
-
-int main_menu_input ()
+int main_menu_input()
 {
     int option;
     scanf("%d", &option);
@@ -28,29 +28,31 @@ int main_menu_input ()
 
 void main_menu()
 {
-	int input;
-	system("cls");
-	welcome();
-	do
+    int input;
+    system("cls || clear");
+    welcome();
+    do
     {
         printf(">> ");
         input = main_menu_input();
         switch (input)
         {
-            case 1: addFood();
+        case 1:
+            addFood();
             break;
-            case 2: 
+        case 2:
             break;
-            case 3:
+        case 3:
             break;
-            case 4:
+        case 4:
+            orderFood();
             break;
-            case 5: return;
+        case 5:
+            return;
             break;
         }
-    } while (input < 1 || input > 5); 
+    } while (input < 1 || input > 5);
 }
-
 
 int main()
 {
