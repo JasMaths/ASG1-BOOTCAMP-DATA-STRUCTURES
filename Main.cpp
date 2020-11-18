@@ -7,11 +7,12 @@
 #include "Menu_Dessert_Drink.cpp"
 #include "orderFood.cpp"
 #include "orderHistory.cpp"
+#include "ViewProcess.cpp"
 
 void welcome()
 {
-    printf("Welcome to Opercooked\n");
-    printf("Today profit : $ %d\n", 0);
+    puts("Welcome to Opercooked");
+    printf("Today profit : $ %d\n", profit);
     puts("===========================");
     puts("1. Add Dessert or Beverage");
     puts("2. View Cooking Process");
@@ -42,13 +43,13 @@ void main_menu()
             addFood();
             break;
         case 2:
+        	CheckProcess();
             break;
         case 3:
-            view_order_history();
+        	view_order_history();
             break;
         case 4:
             orderFood();
-            getchar();
             break;
         case 5:
             return;
