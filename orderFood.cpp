@@ -1,17 +1,20 @@
-struct NodeOrders *addOrders(struct NodeFood *curr)
+struct NodeOrders *addOrders(struct NodeFood *temp2)
 {
     time_t current;
     time(&current);
     struct NodeOrders *temp = (NodeOrders *)malloc(sizeof(NodeOrders));
-    strcpy(temp->Orders.Food.name, curr->Food.name);
-    strcpy(temp->Orders.Food.type, curr->Food.type);
-    strcpy(temp->Orders.Food.topping, curr->Food.topping);
-    strcpy(temp->Orders.Food.flavor, curr->Food.flavor);
+    strcpy(temp->Orders.Food.name, temp2->Food.name);
+    strcpy(temp->Orders.Food.type, temp2->Food.type);
+    strcpy(temp->Orders.Food.topping, temp2->Food.topping);
+    strcpy(temp->Orders.Food.flavor, temp2->Food.flavor);
     strcpy(temp->Orders.orderedtime, ctime(&current));
-    temp->Orders.Food.price = curr->Food.price;
-    temp->Orders.Food.calories = curr->Food.calories;
-    temp->Orders.Food.size = curr->Food.size;
+    temp->Orders.Food.price = temp2->Food.price;
+    temp->Orders.Food.calories = temp2->Food.calories;
+    temp->Orders.Food.size = temp2->Food.size;
+    temp->Orders.temptime = temp2->Food.cookingTime;
+    temp->Orders.cp = 1;
     temp->next = temp->prev = NULL;
+
     return temp;
 };
 
@@ -60,7 +63,7 @@ void createOrder(int order)
 void addOrder()
 {
     int order;
-    printf("Choose a menu to order [%d - %d]:", 1, n - 1);
+    printf("Choose a menu to order [%d - %d]: ", 1, n - 1);
     scanf("%d", &order);
     puts("Successfully added to order list!");
     orderCtr++;
@@ -81,6 +84,9 @@ void printTable()
     int i = 1;
     while (curr)
     {
+        if(curr->Food.calories==0)
+        printf("| %-3d | %-20s | %-6d | %-10s | %-10s | %-10s | %-5c |\n", i, curr->Food.name, curr->Food.price, curr->Food.topping, "-", curr->Food.flavor, curr->Food.size);
+        else
         printf("| %-3d | %-20s | %-6d | %-10s | %-10.2lf | %-10s | %-5c |\n", i, curr->Food.name, curr->Food.price, curr->Food.topping, curr->Food.calories, curr->Food.flavor, curr->Food.size);
         curr = curr->next;
         i++;

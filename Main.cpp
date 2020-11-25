@@ -43,7 +43,7 @@ void main_menu()
             addFood();
             break;
         case 2:
-        	CheckProcess();
+        	ViewProcess();
             break;
         case 3:
         	view_order_history();
