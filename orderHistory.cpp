@@ -1,23 +1,30 @@
 void view_order_history()
 {
-
     if (orderCtr == 0)
     {
+        system("cls || clear");
         printf("There is no order history\n");
         printf("Press Enter to continue");
         getchar();
-        return;
+        main_menu();
     }
     else
     {
+        system("cls || clear");
         printf("| %-3s | %-20s | %-6s | %-10s | %-10s | %-10s | %-5s | %-20s |\n", "No", "Name", "Price", "Topping", "Calories", "Flavor", "Size", "Order Time");
         puts("-------------------------------------------------------------------------------------------------------------");
-        for (int i = 1; i <= orderCtr; i++)
+        curr2 = head2;
+        int i = 1;
+        while (curr2)
         {
-                printf("| %-3d | %-20s | %-6d | %-10s | %-10.2lf | %-10s | %-5c | %-30s |\n", i, Orders[i].name, Orders[i].price, (strcmp(Orders[i].type, "Dessert") != 0) ? "-" : Orders[i].topping, Orders[i].calories, (strcmp(Orders[i].type, "Dessert") == 0) ? "-" : Orders[i].flavor, (Orders[i].size != 'S' && Orders[i].size != 'M' && Orders[i].size != 'L') ? '-' : Orders[i].size, Orders[i].orderedtime);
-                printf("| %-3d | %-20s | %-6d | %-10s | %-10s | %-10s | %-5c | %-30s |", i, Orders[i].name, Orders[i].price, (strcmp(Orders[i].type, "Dessert") != 0) ? "-" : Orders[i].topping, "-", (strcmp(Orders[i].type, "Dessert") == 0) ? "-" : Orders[i].flavor, (Orders[i].size != 'S' && Orders[i].size != 'M' && Orders[i].size != 'L') ? '-' : Orders[i].size, Orders[i].orderedtime);
+            if(curr2->Orders.cp == 0)
+            {
+                printf("| %-3d | %-20s | %-6d | %-10s | %-10.2lf | %-10s | %-5c | %-30s |\n", i, curr2->Orders.Food.name, curr2->Orders.Food.price, curr2->Orders.Food.topping, curr2->Orders.Food.calories, curr2->Orders.Food.flavor, curr2->Orders.Food.size, curr2->Orders.orderedtime);
+                curr2 = curr2->next;
+                i++;
+            }
         }
-        sleep();
+        getchar();
         main_menu();
     }
 }
