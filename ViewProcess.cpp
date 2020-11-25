@@ -1,10 +1,22 @@
-
-int temptimer[1000],av[1000]={0};
-
 void TableHeading()
 {
 	printf("| %-3s | %-8s | %-20s | %-6s | Time Left |\n", "No", "Type" ,"Name", "Price");
         puts("--------------------------------------------------------------");
+}
+
+void CountProfit()
+{
+	curr2 = head2;
+	while (curr2)
+    {
+        if(curr2->Orders.temptime <= 0)
+		{
+			profit+= curr2->Orders.Food.price;
+			curr2->Orders.cp = 0;
+		}
+		curr2 = curr2->next;
+    }
+	main_menu();
 }
 
 void NoProcess()
@@ -12,74 +24,44 @@ void NoProcess()
 	printf("There is no cooking process recently!\n");
 	printf("\n");
 	printf("Press Enter to continue\n");
-	sleep();
-	main_menu();
+	getchar();
+	CountProfit();
+}
+
+void ViewProcessTable()
+{	
+	TableHeading();
+	curr2 = head2;
+    int i = 1;
+    while (curr2)
+    {
+        printf("| %-3d | %-8s | %-20s | %-6s | %-8ds |\n", i, curr2->Orders.Food.type, curr2->Orders.Food.name, curr2->Orders.Food.price, curr2->Orders.temptime);
+		if(curr2->Orders.cp == 1)
+		{
+			curr2->Orders.temptime -= 10;
+		}
+        curr2 = curr2->next;
+        i++;
+    }
+	getchar();
+	CountProfit();
 }
 
 void ViewProcess()
-{	
-	if(a==0)
-	{
-		for(int i = 1;i <= orderCtr;i++)
-		{
-			temptimer[i] = Orders[i].cookingTime;
-		}
-		a++;
-	}
-	else
-	{
-		for(int i = 1;i<=orderCtr;i++)
-		{
-			temptimer[i]-=10;
-		}
-	}
-	int ctr = 0;
-	for(int i = 1;i<=orderCtr;i++)
-	{
-		if(temptimer[i]>0)
-		{
-			ctr = 1;
-		}
-	}
-	
-	if(ctr==0)
-	{
-		NoProcess();
-	}
-	else
-	{
-		TableHeading();
-		for(int i = 1;i<=orderCtr;i++)
-		{
-			if(temptimer[i]>0)
-			{
-				printf("| %-3d | %-8s | %-20s | %-6d | %-8ds |\n", i, Orders[i].type, Orders[i].name, Orders[i].price, temptimer[i]);
-			}
-			else
-			{
-				ctr--;
-				av[i]++;
-			}
-		}
-		for(int i = 1;i<=orderCtr;i++)
-		{
-			if(av[i]==1)
-			{
-				profit += Orders[i].price;
-				av[i]++;
-			}	
-		}
-	}	
-	sleep();
-	main_menu();
-}
-
-void CheckProcess()
 {
 	system("cls || clear");
-	if(orderCtr==0)
-		NoProcess();
+	curr2 = head2;
+	ctlist = 0;
+    while (curr2)
+    {
+        if(curr2->Orders.temptime > 0 && curr2->Orders.cp == 1)
+		{
+			ctlist++;
+		}
+		curr2 = curr2->next;
+    }
+	if(ctlist > 0)
+		ViewProcessTable();
 	else
-		ViewProcess();
+		NoProcess();
 }
-
