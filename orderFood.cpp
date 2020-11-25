@@ -1,10 +1,26 @@
+struct NodeOrders *addOrders(struct NodeFood *curr)
+{
+    time_t current;
+    time(&current);
+    struct NodeOrders *temp = (NodeOrders *)malloc(sizeof(NodeOrders));
+    strcpy(temp->Orders.Food.name, curr->Food.name);
+    strcpy(temp->Orders.Food.type, curr->Food.type);
+    strcpy(temp->Orders.Food.topping, curr->Food.topping);
+    strcpy(temp->Orders.Food.flavor, curr->Food.flavor);
+    strcpy(temp->Orders.orderedtime, ctime(&current));
+    temp->Orders.Food.price = curr->Food.price;
+    temp->Orders.Food.calories = curr->Food.calories;
+    temp->Orders.Food.size = curr->Food.size;
+    temp->next = temp->prev = NULL;
+    return temp;
+};
 
 void orderFood()
 {
     if (n == 1)
     {
         puts("There is no dessert or drink on the list!");
-        printf("\nPress ENTER to continue ");
+        printf("\nPress ENTER to continue");
         getchar();
         return;
     }
@@ -15,57 +31,58 @@ void orderFood()
     }
 }
 
+void pushNodeOrder(struct NodeOrders *temp)
+{
+    if (!head2)
+    {
+        head2 = tail2 = temp;
+    }
+    else
+    {
+        tail2->next = temp;
+        temp->prev = tail2;
+        tail2 = temp;
+    }
+}
+
+void createOrder(int order)
+{
+    curr = head;
+    int i = 1;
+    while (i != order)
+    {
+        i++;
+        curr = curr->next;
+    }
+    pushNodeOrder(addOrders(curr));
+}
+
 void addOrder()
 {
-    char type1[10] = "Dessert", type2[10] = "Drink";
-    printf("Choose a menu to order [%d - %d]: ", 1, n - 1);
+    int order;
+    printf("Choose a menu to order [%d - %d]:", 1, n - 1);
     scanf("%d", &order);
     puts("Successfully added to order list!");
     orderCtr++;
 
-    // Time
-    time_t current;
-    time(&current);
-
-    // Struct
-    strcpy(Orders[orderCtr].type, Food[order].type);
-    strcpy(Orders[orderCtr].name, Food[order].name);
-    strcpy(Orders[orderCtr].topping, Food[order].topping);
-    strcpy(Orders[orderCtr].flavor, Food[order].flavor);
-    strcpy(Orders[orderCtr].orderedtime, ctime(&current));
-    Orders[orderCtr].size = Food[order].size;
-    Orders[orderCtr].price = Food[order].price;
-    Orders[orderCtr].cookingTime = Food[order].cookingTime;
-
-    FILE *fp = fopen("orderHistory.txt", "w");
-
-    for (int i = 1; i <= orderCtr; i++)
-    {
-        fprintf(fp, "%d %s %d %s %.2lf %s %c %s", i, Orders[i].name, Orders[i].price, (strcmp(Orders[i].type, type1) != 0) ? "-" : Orders[i].topping, Orders[i].calories, (strcmp(Orders[i].type, type1) == 0) ? "-" : Orders[i].flavor, (Orders[i].size != 'S' && Orders[i].size != 'M' && Orders[i].size != 'L') ? '-' : Orders[i].size, Orders[i].orderedtime);
-    }
-
-    fclose(fp);
-
-    sleep();
+    createOrder(order);
+    getchar();
+    getchar();
     main_menu();
 }
 
 void printTable()
 {
     system("cls || clear");
-    char type1[10] = "Dessert", type2[10] = "Drink";
-
     printf("| %-3s | %-20s | %-6s | %-10s | %-10s | %-10s | %-5s |\n", "No", "Name", "Price", "Topping", "Calories", "Flavor", "Size");
     puts("--------------------------------------------------------------------------------------");
-    for (int i = 1; i <= n - 1; i++)
+
+    curr = head;
+    int i = 1;
+    while (curr)
     {
-        if (strcmp(Food[i].type, type1) == 0)
-        {
-            printf("| %-3d | %-20s | %-6d | %-10s | %-10.2lf | %-10s | %-5c |\n", i, Food[i].name, Food[i].price, (strcmp(Food[i].type, type1) != 0) ? "-" : Food[i].topping, Food[i].calories, (strcmp(Food[i].type, type1) == 0) ? "-" : Food[i].flavor, (Food[i].size != 'S' && Food[i].size != 'M' && Food[i].size != 'L') ? '-' : Food[i].size);
-        }
-        else
-        {
-            printf("| %-3d | %-20s | %-6d | %-10s | %-10s | %-10s | %-5c |\n", i, Food[i].name, Food[i].price, (strcmp(Food[i].type, type1) != 0) ? "-" : Food[i].topping, "-", (strcmp(Food[i].type, type1) == 0) ? "-" : Food[i].flavor, (Food[i].size != 'S' && Food[i].size != 'M' && Food[i].size != 'L') ? '-' : Food[i].size);
-        }
+        printf("| %-3d | %-20s | %-6d | %-10s | %-10.2lf | %-10s | %-5c |\n", i, curr->Food.name, curr->Food.price, curr->Food.topping, curr->Food.calories, curr->Food.flavor, curr->Food.size);
+        curr = curr->next;
+        i++;
     }
 }
