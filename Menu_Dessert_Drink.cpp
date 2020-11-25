@@ -42,18 +42,11 @@ void pushNodeFood(struct NodeFood* temp)
 		tail = temp;
 	}
 }
-void printNode(){
-   curr = head; 
-   while(curr){
-	   printf("%d ", curr->Food.price);
-	   curr = curr->next;
-   }
-}
 
 void addFood()
 {
 	int input;
-	system("cls || clear");
+	system("cls");
 	puts("What do you want to add?");
 	puts("1. Dessert");
 	puts("2. Drink");
@@ -111,7 +104,6 @@ void dessertMenu()
 	pushNodeFood(createDessert(nameTemp, priceTemp, toppingTemp, caloriesTemp, timeTemp));
 	n++;
 	printf("\nSuccessfully added a new menu!\n");
-	printNode();
 	getchar(); //Makan enter doank (better than sleep function :v)
 	getchar();
 	main_menu();
@@ -236,4 +228,9 @@ char *defstring(char str[])
 		}
 	}
 	return str;
+}
+
+void sleep()
+{
+	for(long long int i = 0;i < 1e9;i++);
 }
