@@ -2,7 +2,6 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
-#define MAX 1000
 #include "Variables_prototypes.cpp"
 #include "Menu_Dessert_Drink.cpp"
 #include "orderFood.cpp"

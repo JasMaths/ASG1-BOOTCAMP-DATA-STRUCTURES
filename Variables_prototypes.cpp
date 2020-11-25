@@ -10,7 +10,8 @@ struct orders
 {
 	struct food Food;
 	int temptime, cp;
-    char orderedtime[100];
+    int year, month, day, hour, minute, second;
+    char m[3];
 };
 
 struct NodeFood
@@ -27,7 +28,7 @@ struct NodeOrders
 
 
 int n = 1,a = 0,profit = 0;       //TOTAL DESSERTS & DRINKS  (Start from 1)
-int orderCtr = 0, id = 0,ctlist = 0;
+int orderCtr = 0, id = 0,ctlist = 0, cookingCtr = 0;
 
 int strcmpInsensitive(char *topping), cookingTimeDessert(int time), cookingTimeDrink(char flavor[]); //Prototypes
 void dessertMenu(), drinkMenu(), sleep(), main_menu();

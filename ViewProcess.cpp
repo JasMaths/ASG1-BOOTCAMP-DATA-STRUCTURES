@@ -13,6 +13,7 @@ void CountProfit()
 		{
 			profit+= curr2->Orders.Food.price;
 			curr2->Orders.cp = 0;
+			cookingCtr++;
 		}
 		curr2 = curr2->next;
     }
