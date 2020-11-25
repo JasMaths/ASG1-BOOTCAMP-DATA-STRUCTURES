@@ -6,6 +6,7 @@ void view_order_history()
         printf("There is no order history\n");
         printf("Press Enter to continue");
         getchar();
+        getchar();
         main_menu();
     }
     else
@@ -21,6 +22,8 @@ void view_order_history()
             curr2 = curr2->next;
             i++;
         }
+        printf("Press Enter to return to main menu\n");
+        getchar();
         getchar();
         main_menu();
     }
